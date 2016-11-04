@@ -1,3 +1,5 @@
+
+
 import Command.Robot.Move.CommandMoveDown;
 import Command.Robot.Move.CommandMoveLeft;
 import Command.Robot.Move.CommandMoveRight;
@@ -20,7 +22,9 @@ import Field.*;
 import Entity.*;
 import Command.*;
 
-
+/**
+ * Created by Sersh on 02.11.2016.
+ */
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
