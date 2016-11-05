@@ -16,4 +16,16 @@ public class CommandMoveUp implements CommandMove {
         }
         else System.out.println("Error, board is end.");
     }
+
+    public boolean doCommand(Entity ent) {
+        boolean n = ent.getY()>0? true:false;
+        if(n) {
+            ent.setY(ent.getY() - 1);
+            return true;
+        }
+        else {
+            System.out.println("Error, board is end.");
+            return false;
+        }
+    }
 }

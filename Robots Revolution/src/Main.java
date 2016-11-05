@@ -1,9 +1,11 @@
 
 
+import Animation.Move.Move;
 import Command.Robot.Move.CommandMoveDown;
 import Command.Robot.Move.CommandMoveLeft;
 import Command.Robot.Move.CommandMoveRight;
 import Command.Robot.Move.CommandMoveUp;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,48 +28,65 @@ import Command.*;
  * Created by Sersh on 02.11.2016.
  */
 public class Main extends Application {
+    CommandMoveUp up;
+    CommandMoveDown down;
+    CommandMoveRight right;
+    CommandMoveLeft left;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Application");
         primaryStage.setWidth(600);
         primaryStage.setHeight(400);
 
-        CommandMoveUp up = new CommandMoveUp();
-        CommandMoveDown down = new CommandMoveDown();
-        CommandMoveRight right = new CommandMoveRight();
-        CommandMoveLeft left = new CommandMoveLeft();
-
         BorderPane borderPane = new BorderPane();
         Table table = new Table();
         table.setAlignment(Pos.CENTER);
 
+        up = new CommandMoveUp();
+        down = new CommandMoveDown(table.getRectList().size());
+        right = new CommandMoveRight(table.getRectList().get(0).size());
+        left = new CommandMoveLeft();
+
         MenuRuls menuRuls = new MenuRuls();
         menuRuls.setAlignment(Pos.CENTER);
-
-        menuRuls.getButtonList().get(0).setOnAction(event -> {
-            up.doCommand(table,table.getRobotList().get(0));
-        });
-        menuRuls.getButtonList().get(1).setOnAction(event -> {
-            down.doCommand(table,table.getRobotList().get(0));
-        });
-        menuRuls.getButtonList().get(2).setOnAction(event -> {
-            right.doCommand(table,table.getRobotList().get(0));
-        });
-        menuRuls.getButtonList().get(3).setOnAction(event -> {
-            left.doCommand(table,table.getRobotList().get(0));
-        });
+        makeMenuRuls(menuRuls,table);
 
         borderPane.setCenter(table);
-
         borderPane.setRight(menuRuls);
+
         Scene scene = new Scene(borderPane);
-
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args){
         launch(args);
+    }
+
+    void makeMenuRuls(MenuRuls menuRuls, Table table){
+        menuRuls.getButtonList().get(0).setOnAction(event -> {
+            if(up.doCommand(table.getRobotList().get(0))){
+                Move.doCommand(true,-(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
+                        table.getRobotList().get(0));
+            }
+        });
+        menuRuls.getButtonList().get(1).setOnAction(event -> {
+            if(down.doCommand(table.getRobotList().get(0))){
+                Move.doCommand(true,(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
+                        table.getRobotList().get(0));
+            }
+        });
+        menuRuls.getButtonList().get(2).setOnAction(event -> {
+            if(right.doCommand(table.getRobotList().get(0))) {
+                Move.doCommand(false,table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth(),
+                        table.getRobotList().get(0));
+            }
+        });
+        menuRuls.getButtonList().get(3).setOnAction(event -> {
+            if(left.doCommand(table.getRobotList().get(0))) {
+                Move.doCommand(false,-(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
+                        table.getRobotList().get(0));
+            }
+        });
     }
 }

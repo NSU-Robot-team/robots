@@ -13,17 +13,17 @@ public class Robot extends Entity{
         super();
     }
 
-    public Robot(String way){
+    public Robot(String way, int RECTANGLE_SIZE){
         imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
-        imgv.setFitHeight(60);
-        imgv.setFitWidth(60);
+        imgv.setFitHeight(RECTANGLE_SIZE-10);
+        imgv.setFitWidth(RECTANGLE_SIZE-10);
         getChildren().addAll(imgv);
     }
 
-    public void setImg(String way){
+    public void setImg(String way, int RECTANGLE_SIZE){
         imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
-        imgv.setFitHeight(60);
-        imgv.setFitWidth(60);
+        imgv.setFitHeight(RECTANGLE_SIZE-10);
+        imgv.setFitWidth(RECTANGLE_SIZE-10);
     }
 
     @Override

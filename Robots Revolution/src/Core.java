@@ -64,9 +64,9 @@ public class Core {
 
         LinkedList<Pair> toDoList = new LinkedList<>();
 
-        Command left = new CommandMoveLeft();
-        Command right = new CommandMoveRight();
-        Command down = new CommandMoveDown();
+        /*Command left = new CommandMoveLeft();
+        //Command right = new CommandMoveRight();
+        //Command down = new CommandMoveDown();
         Command up = new CommandMoveUp();
 
         toDoList.add(new Pair(up, rob0));
@@ -92,7 +92,7 @@ public class Core {
         toDoList.add(new Pair(right, rob2));
         toDoList.add(new Pair(down, rob3));
         doTurns(toDoList, 9);
-        toDoList.clear();
+        toDoList.clear();*/
     }
 
 

@@ -26,7 +26,7 @@ public class Table extends GridPane {
     }
 
     public void addRobot(String way, int x, int y){
-        Robot rob = new Robot(way);
+        Robot rob = new Robot(way,RECTANGLE_SIZE);
         rob.imgv.setTranslateX((RECTANGLE_SIZE+2)*x+5);
         rob.imgv.setTranslateY((RECTANGLE_SIZE+2)*y+5);
         rob.setX(x);

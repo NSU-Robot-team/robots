@@ -5,6 +5,22 @@ import Field.Table;
 import javafx.animation.TranslateTransition;
 
 public class CommandMoveLeft implements CommandMove {
+
+    public boolean doCommand(Entity ent) {
+        boolean n = ent.getX()>0? true:false;
+        if(n) {
+            ent.setX(ent.getX() - 1);
+            return true;
+        }
+        else {
+            System.out.println("Error, board is end.");
+            return false;
+        }
+    }
+
+
+
+    @Override
     public void doCommand(Table table, Entity ent) {
         boolean n = ent.getX()>0? true:false;
         if(n) {
