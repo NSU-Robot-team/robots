@@ -28,6 +28,7 @@ import Command.*;
  * Created by Sersh on 02.11.2016.
  */
 public class Main extends Application {
+    int robotCount = 0;
     CommandMoveUp up;
     CommandMoveDown down;
     CommandMoveRight right;
@@ -51,8 +52,11 @@ public class Main extends Application {
         menuRuls.setAlignment(Pos.CENTER);
         makeMenuRuls(menuRuls,table);
 
+        Item item = new Item("This is Item");
+
         borderPane.setCenter(table);
         borderPane.setRight(menuRuls);
+        borderPane.setTop(item);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -64,28 +68,44 @@ public class Main extends Application {
     }
 
     void makeMenuRuls(MenuRuls menuRuls, Table table){
+        menuRuls.setText(String.valueOf(robotCount));
+
+        menuRuls.getButtonList().get(4).setOnAction(event -> {
+            if(robotCount<table.getRobotList().size()) {
+                ++robotCount;
+                menuRuls.setText(String.valueOf(robotCount));
+            }else System.out.println("Robot's end.");
+        });
+
+        menuRuls.getButtonList().get(5).setOnAction(event -> {
+            if(robotCount>0) {
+                --robotCount;
+                menuRuls.setText(String.valueOf(robotCount));
+            }else System.out.println("Robot's end.");
+        });
+
         menuRuls.getButtonList().get(0).setOnAction(event -> {
-            if(up.doCommand(table.getRobotList().get(0))){
+            if(up.doCommand(table.getRobotList().get(robotCount))){
                 Move.doCommand(true,-(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
-                        table.getRobotList().get(0));
+                        table.getRobotList().get(robotCount));
             }
         });
         menuRuls.getButtonList().get(1).setOnAction(event -> {
-            if(down.doCommand(table.getRobotList().get(0))){
+            if(down.doCommand(table.getRobotList().get(robotCount))){
                 Move.doCommand(true,(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
-                        table.getRobotList().get(0));
+                        table.getRobotList().get(robotCount));
             }
         });
         menuRuls.getButtonList().get(2).setOnAction(event -> {
-            if(right.doCommand(table.getRobotList().get(0))) {
+            if(right.doCommand(table.getRobotList().get(robotCount))) {
                 Move.doCommand(false,table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth(),
-                        table.getRobotList().get(0));
+                        table.getRobotList().get(robotCount));
             }
         });
         menuRuls.getButtonList().get(3).setOnAction(event -> {
-            if(left.doCommand(table.getRobotList().get(0))) {
+            if(left.doCommand(table.getRobotList().get(robotCount))) {
                 Move.doCommand(false,-(table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getStrokeWidth()),
-                        table.getRobotList().get(0));
+                        table.getRobotList().get(robotCount));
             }
         });
     }

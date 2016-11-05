@@ -22,6 +22,7 @@ public class Table extends GridPane {
     public Table(){
         makeBoard(rectList);
         addRobot("zayats-robot.png",0,0);
+        addRobot("zayats-robot.png",1,1);
         this.getChildren().addAll(robotList);
     }
 
