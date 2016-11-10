@@ -5,6 +5,9 @@ import Entity.*;
 import Field.Table;
 
 public interface CommandRobot extends Command{
-    public  void doCommand(Table table, Entity ent);
+    void doCommand(Table table, Entity ent);
+    String getName();
+    boolean doCommand(Entity ent);
+    public boolean getDir();
 }
 

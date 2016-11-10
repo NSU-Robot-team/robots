@@ -1,10 +1,17 @@
 package Command.Robot.Move;
 
+import Animation.Move.Move;
 import Entity.*;
 import Field.Table;
 import javafx.animation.TranslateTransition;
 
 public class CommandMoveLeft implements CommandMove {
+
+    double RECTANGLE_SIZE = 0;
+    public boolean direction = false;
+    public CommandMoveLeft(double SIZE){
+        RECTANGLE_SIZE = SIZE;
+    }
 
     public boolean doCommand(Entity ent) {
         boolean n = ent.getX()>0? true:false;
@@ -18,7 +25,9 @@ public class CommandMoveLeft implements CommandMove {
         }
     }
 
-
+    public boolean getDir(){
+        return direction;
+    }
 
     @Override
     public void doCommand(Table table, Entity ent) {
@@ -30,6 +39,10 @@ public class CommandMoveLeft implements CommandMove {
             tt.play();
         }
         else System.out.println("Error, board is end.");
+    }
+
+    public String getName(){
+        return "Left";
     }
 
 }

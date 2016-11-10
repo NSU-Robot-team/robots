@@ -41,4 +41,8 @@ public class Item extends StackPane {
         text.setText(s);
         System.out.println(text.getText());
     }
+
+    public String getText(){
+        return text.getText();
+    }
 }

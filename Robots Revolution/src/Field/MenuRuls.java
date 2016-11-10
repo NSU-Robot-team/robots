@@ -1,6 +1,7 @@
 package Field;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.util.LinkedList;
@@ -21,21 +22,37 @@ public class MenuRuls extends GridPane {
         buttonList.add(addButton("Next"));
         buttonList.add(addButton("Prev"));
 
-        buttonList.add(addButton("miss"));
+        buttonList.add(addButton("miss1"));
+        buttonList.add(addButton("miss2"));
 
-        this.add(item,0,0);
-        this.add(buttonList.get(5),1,0);
-        this.add(buttonList.get(4),2,0);
+        buttonList.add(addButton("Start"));
+
+        Label label1 = new Label("Выберите ро");
+        Label label2 = new Label("бота");
+
+        this.add(label1,0,0);
+        this.add(label2,1,0);
+
+        this.add(item,0,1);
+        this.add(buttonList.get(5),1,1);
+        this.add(buttonList.get(4),2,1);
+
         buttonList.get(6).setOpacity(0);
-        this.add(buttonList.get(6),1,1);
+        buttonList.get(7).setOpacity(0);
+
+        this.add(buttonList.get(6),1,2);
+        this.add(buttonList.get(7),1,5);
+
+
 
         //this.setGridLinesVisible(true);
-        this.add(buttonList.get(0),1,2);
-        this.add(buttonList.get(1),1,3);
-        this.add(buttonList.get(2),2,3);
-        this.add(buttonList.get(3),0,3);
+        this.add(buttonList.get(0),1,3);
+        this.add(buttonList.get(1),1,4);
+        this.add(buttonList.get(2),2,4);
+        this.add(buttonList.get(3),0,4);
+        this.add(buttonList.get(8),1,6);
 
-        this.setRowIndex(buttonList.get(0),2);
+        //this.setRowIndex(buttonList.get(0),4);
     }
 
     public LinkedList<Button> getButtonList(){
