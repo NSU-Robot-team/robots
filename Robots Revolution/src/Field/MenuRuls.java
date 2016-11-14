@@ -27,6 +27,9 @@ public class MenuRuls extends GridPane {
 
         buttonList.add(addButton("Start"));
 
+        buttonList.add(addButton("<-"));
+        buttonList.add(addButton("->"));
+
         Label label1 = new Label("Выберите ро");
         Label label2 = new Label("бота");
 
@@ -51,6 +54,8 @@ public class MenuRuls extends GridPane {
         this.add(buttonList.get(2),2,4);
         this.add(buttonList.get(3),0,4);
         this.add(buttonList.get(8),1,6);
+        this.add(buttonList.get(9),0,6);
+        this.add(buttonList.get(10),2,6);
 
         //this.setRowIndex(buttonList.get(0),4);
     }
