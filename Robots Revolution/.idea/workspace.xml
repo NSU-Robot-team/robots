@@ -28,12 +28,24 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-341">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="24" />
+            <state relative-caret-position="119">
+              <caret line="37" column="52" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1979#1980#0" expanded="true" />
-                <element signature="method#checkClash#0;class#Main#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Furniture.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Furniture.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="15" column="53" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#261#262#0" expanded="true" />
+                <element signature="e#284#285#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,37 +73,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Table.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Field/Table.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="31" column="53" selection-start-line="31" selection-start-column="53" selection-end-line="31" selection-end-column="53" />
+            <state relative-caret-position="425">
+              <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
               <folding>
-                <element signature="e#1181#1182#0" expanded="true" />
-                <element signature="e#1213#1214#0" expanded="true" />
+                <element signature="method#Table#0;class#Table#0" expanded="false" />
+                <element signature="method#addRobot#0;class#Table#0" expanded="false" />
+                <element signature="method#addFurniture#0;class#Table#0" expanded="false" />
+                <element signature="e#1745#1746#0" expanded="true" />
+                <element signature="e#1777#1778#0" expanded="true" />
                 <element signature="method#addRectangle#0;class#Table#0" expanded="false" />
+                <element signature="method#addRectangle#1;class#Table#0" expanded="false" />
+                <element signature="method#makeBoard#0;class#Table#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandMoveDown.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveDown.java">
+      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Entity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="68">
+              <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
               <folding>
-                <element signature="method#CommandMoveDown#0;class#CommandMoveDown#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandMoveLeft.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveLeft.java">
+      <file leaf-file-name="Pair.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Pair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+            <state relative-caret-position="119">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -100,14 +117,17 @@
       <file leaf-file-name="RectItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Field/RectItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            <state relative-caret-position="782">
+              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#495#496#0" expanded="true" />
-                <element signature="e#522#523#0" expanded="true" />
-                <element signature="e#814#815#0" expanded="true" />
-                <element signature="e#855#856#0" expanded="true" />
+                <element signature="e#842#843#0" expanded="true" />
+                <element signature="e#869#870#0" expanded="true" />
+                <element signature="method#setCount#0;class#RectItem#0" expanded="false" />
+                <element signature="e#1500#1501#0" expanded="true" />
+                <element signature="e#1544#1545#0" expanded="true" />
+                <element signature="e#1572#1573#0" expanded="true" />
+                <element signature="e#1613#1614#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +136,8 @@
       <file leaf-file-name="Robot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
-              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+            <state relative-caret-position="85">
+              <caret line="7" column="26" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="26" />
               <folding>
                 <element signature="e#815#816#0" expanded="true" />
                 <element signature="e#841#842#0" expanded="true" />
@@ -129,23 +149,13 @@
       <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Field/Item.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+            <state relative-caret-position="510">
+              <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1189#1190#0" expanded="true" />
                 <element signature="e#1226#1227#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandMoveUp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveUp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -169,8 +179,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Core.java" />
-        <option value="$PROJECT_DIR$/src/Field/Item.java" />
-        <option value="$PROJECT_DIR$/src/Pair.java" />
         <option value="$PROJECT_DIR$/src/Animation/Move/Move.java" />
         <option value="$PROJECT_DIR$/src/Field/MenuRuls.java" />
         <option value="$PROJECT_DIR$/src/Command/Robot/Move/CommandMove.java" />
@@ -180,10 +188,14 @@
         <option value="$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveUp.java" />
         <option value="$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveDown.java" />
         <option value="$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveRight.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/Field/RectItem.java" />
         <option value="$PROJECT_DIR$/src/Entity/Robot.java" />
+        <option value="$PROJECT_DIR$/src/Entity/Furniture.java" />
+        <option value="$PROJECT_DIR$/src/Entity/Entity.java" />
+        <option value="$PROJECT_DIR$/src/Field/Item.java" />
+        <option value="$PROJECT_DIR$/src/Field/RectItem.java" />
         <option value="$PROJECT_DIR$/src/Field/Table.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Pair.java" />
       </list>
     </option>
   </component>
@@ -224,8 +236,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -363,6 +373,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -827,12 +839,13 @@
       <workItem from="1478580690361" duration="670000" />
       <workItem from="1478618302472" duration="43000" />
       <workItem from="1478697683012" duration="1641000" />
-      <workItem from="1478764665803" duration="13562000" />
+      <workItem from="1478764665803" duration="20239000" />
+      <workItem from="1479132330393" duration="950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40119000" />
+    <option name="totallyTimeSpent" value="47746000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -846,7 +859,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20662461" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20504732" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -921,8 +934,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1979#1980#0" expanded="true" />
-            <element signature="method#checkClash#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -932,9 +943,14 @@
         <state relative-caret-position="323">
           <caret line="19" column="42" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="42" />
           <folding>
-            <element signature="e#1181#1182#0" expanded="true" />
-            <element signature="e#1213#1214#0" expanded="true" />
+            <element signature="method#Table#0;class#Table#0" expanded="false" />
+            <element signature="method#addRobot#0;class#Table#0" expanded="false" />
+            <element signature="method#addFurniture#0;class#Table#0" expanded="false" />
+            <element signature="e#1745#1746#0" expanded="true" />
+            <element signature="e#1777#1778#0" expanded="true" />
             <element signature="method#addRectangle#0;class#Table#0" expanded="false" />
+            <element signature="method#addRectangle#1;class#Table#0" expanded="false" />
+            <element signature="method#makeBoard#0;class#Table#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -969,22 +985,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="method#doCommand#0;class#CommandMoveLeft#0" expanded="false" />
-            <element signature="e#584#585#0" expanded="true" />
-            <element signature="e#616#617#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java" />
     <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveRight.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1017,8 +1022,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1979#1980#0" expanded="true" />
-            <element signature="method#checkClash#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1053,11 +1056,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-          <folding>
-            <element signature="method#doCommand#0;class#CommandMoveLeft#0" expanded="false" />
-            <element signature="e#584#585#0" expanded="true" />
-            <element signature="e#616#617#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1069,14 +1068,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java" />
     <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMoveRight.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1116,13 +1108,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Animation/Animation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Animation/Animation.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/animation/Transition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1151,14 +1137,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Animation/Move/Move.java" />
     <entry file="file://$PROJECT_DIR$/src/Command/Robot/Move/CommandMove.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1179,30 +1158,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="5" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Furniture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1255,7 +1210,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="751" column="7" selection-start-line="751" selection-start-column="7" selection-end-line="751" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1263,17 +1217,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="190" column="0" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Field/MenuRuls.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding>
-            <element signature="method#addButton#0;class#MenuRuls#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1287,8 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Field/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        <state relative-caret-position="510">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1189#1190#0" expanded="true" />
@@ -1297,36 +1240,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Field/MenuRuls.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-341">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="24" />
+        <state relative-caret-position="425">
+          <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1979#1980#0" expanded="true" />
-            <element signature="method#checkClash#0;class#Main#0" expanded="false" />
+            <element signature="method#addButton#0;class#MenuRuls#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Field/RectItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state relative-caret-position="782">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#522#523#0" expanded="true" />
-            <element signature="e#814#815#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+            <element signature="method#setCount#0;class#RectItem#0" expanded="false" />
+            <element signature="e#1500#1501#0" expanded="true" />
+            <element signature="e#1544#1545#0" expanded="true" />
+            <element signature="e#1572#1573#0" expanded="true" />
+            <element signature="e#1613#1614#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Robot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        <state relative-caret-position="85">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="26" />
           <folding>
             <element signature="e#815#816#0" expanded="true" />
             <element signature="e#841#842#0" expanded="true" />
@@ -1334,15 +1278,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Furniture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="53" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Field/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="31" column="53" selection-start-line="31" selection-start-column="53" selection-end-line="31" selection-end-column="53" />
+        <state relative-caret-position="425">
+          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
           <folding>
-            <element signature="e#1181#1182#0" expanded="true" />
-            <element signature="e#1213#1214#0" expanded="true" />
+            <element signature="method#Table#0;class#Table#0" expanded="false" />
+            <element signature="method#addRobot#0;class#Table#0" expanded="false" />
+            <element signature="method#addFurniture#0;class#Table#0" expanded="false" />
+            <element signature="e#1745#1746#0" expanded="true" />
+            <element signature="e#1777#1778#0" expanded="true" />
             <element signature="method#addRectangle#0;class#Table#0" expanded="false" />
+            <element signature="method#addRectangle#1;class#Table#0" expanded="false" />
+            <element signature="method#makeBoard#0;class#Table#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="37" column="52" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

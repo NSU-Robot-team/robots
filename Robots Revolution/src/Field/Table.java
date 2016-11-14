@@ -1,5 +1,6 @@
 package Field;
 
+import Entity.Furniture;
 import javafx.animation.TranslateTransition;
 import Entity.Robot;
 import javafx.scene.layout.GridPane;
@@ -17,23 +18,36 @@ import java.util.Random;
 public class Table extends GridPane {
     LinkedList<LinkedList<RectItem>> rectList =  new LinkedList<>();
     LinkedList<Robot> robotList =  new LinkedList<>();
+    LinkedList<Furniture> furnitureList =  new LinkedList<>();
     public static final int RECTANGLE_SIZE = 70;
 
     public Table(){
         makeBoard(rectList);
-        addRobot("zayats-robot.png",0,0);
-        addRobot("zayats-robot.png",1,2);
+        addRobot("robot.png",0,0);
+        addRobot("robot.png",1,2);
+        addFurniture("stop.png",0,3);
         this.getChildren().addAll(robotList);
+        this.getChildren().addAll(furnitureList);
     }
 
     public void addRobot(String way, int x, int y){
         Robot rob = new Robot(way,RECTANGLE_SIZE);
-        rob.imgv.setTranslateX((RECTANGLE_SIZE+2)*y+15);
-        rob.imgv.setTranslateY((RECTANGLE_SIZE+2)*x+15);
+        rob.imgv.setTranslateX((RECTANGLE_SIZE+2)*y+5);
+        rob.imgv.setTranslateY((RECTANGLE_SIZE+2)*x+5);
         rob.setX(x);
         rob.setY(y);
         rectList.get(x).get(y).setCount(rectList.get(x).get(y).getCount()+1);
         robotList.add(rob);
+    }
+
+    public void addFurniture(String way, int x, int y){
+        Furniture fur = new Furniture(way,RECTANGLE_SIZE);
+        fur.imgv.setTranslateX((RECTANGLE_SIZE+2)*y+5);
+        fur.imgv.setTranslateY((RECTANGLE_SIZE+2)*x+5);
+        fur.setX(x);
+        fur.setY(y);
+        rectList.get(x).get(y).setFurnitureCount(rectList.get(x).get(y).getFurnitureCount()+1);
+        furnitureList.add(fur);
     }
 
     public LinkedList<LinkedList<RectItem>> getRectList(){
@@ -42,6 +56,10 @@ public class Table extends GridPane {
 
     public LinkedList<Robot> getRobotList(){
         return  robotList;
+    }
+
+    public LinkedList<Furniture> getFurnitureList(){
+        return  furnitureList;
     }
 
     private Rectangle addRectangle(RectItem old){

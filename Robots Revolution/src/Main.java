@@ -205,25 +205,29 @@ public class Main extends Application {
         System.out.println("Check "+pairs.ent.getX()+" "+pairs.ent.getY());
         if (pairs.com == up) {
 
-            if(pairs.ent.getX()==0 || table.getRectList().get(pairs.ent.getX()-1).get(pairs.ent.getY()).getCount()!=0){
+            if(pairs.ent.getX()==0 || table.getRectList().get(pairs.ent.getX()-1).get(pairs.ent.getY()).getCount()!=0 ||
+                    table.getRectList().get(pairs.ent.getX()-1).get(pairs.ent.getY()).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.com == down){
-            if(pairs.ent.getX()==(table.getRectList().size()-1) || table.getRectList().get(pairs.ent.getX()+1).get(pairs.ent.getY()).getCount()!=0){
+            if(pairs.ent.getX()==(table.getRectList().size()-1) || table.getRectList().get(pairs.ent.getX()+1).get(pairs.ent.getY()).getCount()!=0 ||
+                    table.getRectList().get(pairs.ent.getX()+1).get(pairs.ent.getY()).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.com == left){
-            if(pairs.ent.getY()==0 || table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()-1).getCount()!=0){
+            if(pairs.ent.getY()==0 || table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()-1).getCount()!=0 ||
+                    table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()-1).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.com == right){
-            if(pairs.ent.getY()==(table.getRectList().get(0).size()-1) || table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()+1).getCount()!=0){
+            if(pairs.ent.getY()==(table.getRectList().get(0).size()-1) || table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()+1).getCount()!=0 ||
+                    table.getRectList().get(pairs.ent.getX()).get(pairs.ent.getY()+1).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
