@@ -85,6 +85,21 @@ public class MakeGame {
         }
         borderPane.setCenter(table);
         return borderPane;
+    }
+
+    public BorderPane getPaneForSetFurn(){
+        borderPane.getChildren().removeAll(menuRuls,item);
+        for(int i=0; i<table.getRectList().size(); i++){
+            for(int j=0; j<table.getRectList().get(0).size(); j++){
+                int finalJ = j;
+                int finalI = i;
+                table.getRectList().get(i).get(j).setOnMouseClicked(event -> {
+                    table.addFurniture("stop.png",finalI,finalJ);
+                });
+            }
+        }
+        borderPane.setCenter(table);
+        return borderPane;
 
     }
 

@@ -18,10 +18,16 @@ public class MakeMenu {
     public static MenuBox DoIt(Scene scene, MakeGame game, StackPane root){
 
         MenuItem startItem = new MenuItem("Старт");
+        MenuItem settingItem = new MenuItem("Расстановка");
         MenuItem exitItem = new MenuItem("Выход");
 
-        SubMenu subMenu = new SubMenu(startItem,exitItem);
-        MenuBox menuBox = new MenuBox(subMenu);
+        MenuItem setRobItem = new MenuItem("Расставить роботов");
+        MenuItem setFurItem = new MenuItem("Расставить препятсвия");
+        MenuItem backItem = new MenuItem("Назад");
+
+        SubMenu startSubMenu = new SubMenu(startItem,settingItem,exitItem);
+        SubMenu settingMenu = new SubMenu(setRobItem,setFurItem,backItem);
+        MenuBox menuBox = new MenuBox(startSubMenu);
 
         startItem.setOnMouseClicked(event -> {
             game.getPaneForGame();
@@ -34,8 +40,38 @@ public class MakeMenu {
             ft.play();
         });
 
+        settingItem.setOnMouseClicked(event -> {
+            menuBox.setSubMenu(settingMenu);
+        });
+
         exitItem.setOnMouseClicked(event -> {
             System.exit(0);
+        });
+
+        setRobItem.setOnMouseClicked(event -> {
+            game.getPaneForSet();
+            FadeTransition ft = new FadeTransition(Duration.seconds(0.5),menuBox);
+            ft.setFromValue(1);
+            ft.setToValue(0);
+            ft.setOnFinished(event1 -> {
+                menuBox.setVisible(false);
+            });
+            ft.play();
+        });
+
+        setFurItem.setOnMouseClicked(event -> {
+            game.getPaneForSetFurn();
+            FadeTransition ft = new FadeTransition(Duration.seconds(0.5),menuBox);
+            ft.setFromValue(1);
+            ft.setToValue(0);
+            ft.setOnFinished(event1 -> {
+                menuBox.setVisible(false);
+            });
+            ft.play();
+        });
+
+        backItem.setOnMouseClicked(event -> {
+            menuBox.setSubMenu(startSubMenu);
         });
 
 

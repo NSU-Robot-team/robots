@@ -45,8 +45,8 @@ public class Table extends GridPane {
 
     public void addFurniture(String way, int x, int y){
         Furniture fur = new Furniture(way,RECTANGLE_SIZE);
-        fur.imgv.setTranslateX((RECTANGLE_SIZE+2)*y+5);
-        fur.imgv.setTranslateY((RECTANGLE_SIZE+2)*x+5);
+        fur.setTranslateX((RECTANGLE_SIZE+2)*y+5);
+        fur.setTranslateY((RECTANGLE_SIZE+2)*x+5);
         fur.setX(x);
         fur.setY(y);
         rectList.get(x).get(y).setFurnitureCount(rectList.get(x).get(y).getFurnitureCount()+1);

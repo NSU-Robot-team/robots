@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class Furniture extends Pane implements Entity {
+public class Furniture extends ImageView implements Entity {
     public ImageView imgv;
     private int X;
     private int Y;
@@ -14,10 +14,14 @@ public class Furniture extends Pane implements Entity {
     }
 
     public Furniture(String way, int RECTANGLE_SIZE){
-        imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
+        /*imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
         imgv.setFitHeight(RECTANGLE_SIZE-10);
         imgv.setFitWidth(RECTANGLE_SIZE-10);
         getChildren().addAll(imgv);
+        */
+        super(way);
+        setFitHeight(RECTANGLE_SIZE-10);
+        setFitWidth(RECTANGLE_SIZE-10);
     }
 
     public void setImg(String way, int RECTANGLE_SIZE){
