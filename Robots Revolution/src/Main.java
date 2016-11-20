@@ -39,9 +39,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Application");
-        primaryStage.setWidth(700);
-        primaryStage.setHeight(500);
+        primaryStage.setTitle("Robolution");
+        primaryStage.setWidth(716);
+        primaryStage.setHeight(530);
+
+        primaryStage.setMaxWidth(716);
+        primaryStage.setMaxHeight(530);
         /*
         LinkedList<Pair> pairs = new LinkedList<>();
 

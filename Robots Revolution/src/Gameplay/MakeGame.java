@@ -265,7 +265,7 @@ public class MakeGame {
                         seqT.getChildren().addAll(trLinkedList.getLast(), new FillTransition(Duration.millis(30),
                                 table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell() ,(Color) table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell().getFill(), Color.RED));
                     }
-                    else break;
+                    else return;
                 }
             }
             seqT.play();
