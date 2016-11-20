@@ -77,7 +77,8 @@ public class MakeGame {
                 int finalJ = j;
                 int finalI = i;
                 table.getRectList().get(i).get(j).setOnMouseClicked(event -> {
-                    table.addRobot("smollRobot.png", finalI, finalJ);
+                    if(!table.addRobot("smollRobot.png", finalI, finalJ))
+                        return;
                     pairs.add(new Pair(table.getRobotList().getLast()));
                     System.out.println(finalI+" "+finalJ);
                 });
@@ -94,7 +95,8 @@ public class MakeGame {
                 int finalJ = j;
                 int finalI = i;
                 table.getRectList().get(i).get(j).setOnMouseClicked(event -> {
-                    table.addFurniture("stop.png",finalI,finalJ);
+                    if(!table.addFurniture("stop.png",finalI,finalJ))
+                        return;
                 });
             }
         }
@@ -175,7 +177,7 @@ public class MakeGame {
             else
                 item.setText(left.getName());
         });
-        /*Start button*/
+        /* --Start-- button*/
         menuRuls.getButtonList().get(8).setOnAction(event -> {
 
             if(stepCount!=0)
@@ -190,7 +192,9 @@ public class MakeGame {
                     if(pairs.get(j).comList.size()>i) {
                         currentlyX = pairs.get(j).ent.getCurrentX();
                         currentlyY = pairs.get(j).ent.getCurrentY();
+                        System.out.println(currentlyX+" "+currentlyY);
                         if (checkClash(pairs.get(j), table, i) && pairs.get(j).comList.get(i).doCommand(pairs.get(j).ent)) {
+                            //System.out.println("make "+pairs.get(j).ent.getCurrentX()+" "+pairs.get(j).ent.getCurrentY());
                             makeStepAnimation(trLinkedList,table,pairs.get(j),i,currentlyX,currentlyY);
                             seqT.getChildren().addAll(trLinkedList.getLast(), new FillTransition(Duration.millis(30),
                                     table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell() ,(Color) table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell().getFill(), Color.RED));
@@ -336,32 +340,32 @@ public class MakeGame {
         trLinkedList.add(new TranslateTransition(javafx.util.Duration.millis(500),
                 (Node) pairs.ent));
 
-        table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()).setCount(
-                table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()).getCount()+1);
+        final int thisX = pairs.ent.getCurrentX();
+        final int thisY = pairs.ent.getCurrentY();
+        trLinkedList.getLast().setOnFinished(event -> {
+            System.out.println("make "+pairs.ent.getCurrentX()+" "+pairs.ent.getCurrentY());
+
+            table.getRectList().get(thisX).get(thisY).setCount(
+                    table.getRectList().get(thisX).get(thisY).getCount()+1);
+
+            table.getRectList().get(currentlyX).get(currentlyY).setCount(
+                    table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
+        });
 
         /*horizontally or vertically*/
         if (pairs.comList.get(i).getDir()) {
             if (pairs.comList.get(i) == up) {
                 trLinkedList.getLast().setByY(-moveLength);
-                table.getRectList().get(currentlyX).get(currentlyY).setCount(
-                        table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
-
             }
             else {
                 trLinkedList.getLast().setByY(moveLength);
-                table.getRectList().get(currentlyX).get(currentlyY).setCount(
-                        table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
             }
         } else {
             if (pairs.comList.get(i) == left) {
                 trLinkedList.getLast().setByX(-moveLength);
-                table.getRectList().get(currentlyX).get(currentlyY).setCount(
-                        table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
             }
             else {
                 trLinkedList.getLast().setByX(moveLength);
-                table.getRectList().get(currentlyX).get(currentlyY).setCount(
-                        table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
             }
         }
 

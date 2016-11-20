@@ -32,7 +32,9 @@ public class Table extends GridPane {
         //this.getChildren().add(pane);
     }
 
-    public void addRobot(String way, int x, int y){
+    public boolean addRobot(String way, int x, int y){
+        if(rectList.get(x).get(y).getFurnitureCount()!=0)
+            return false;
         Robot rob = new Robot(way,RECTANGLE_SIZE);
         rob.setTranslateX((RECTANGLE_SIZE+2)*y+7);
         rob.setTranslateY((RECTANGLE_SIZE+2)*x);
@@ -41,9 +43,13 @@ public class Table extends GridPane {
         rectList.get(x).get(y).setCount(rectList.get(x).get(y).getCount()+1);
         robotList.add(rob);
         this.getChildren().addAll(robotList.getLast());
+
+        return true;
     }
 
-    public void addFurniture(String way, int x, int y){
+    public boolean addFurniture(String way, int x, int y){
+        if(rectList.get(x).get(y).getCount()!=0)
+            return false;
         Furniture fur = new Furniture(way,RECTANGLE_SIZE);
         fur.setTranslateX((RECTANGLE_SIZE+2)*y+5);
         fur.setTranslateY((RECTANGLE_SIZE+2)*x+5);
@@ -52,6 +58,8 @@ public class Table extends GridPane {
         rectList.get(x).get(y).setFurnitureCount(rectList.get(x).get(y).getFurnitureCount()+1);
         furnitureList.add(fur);
         this.getChildren().addAll(furnitureList.getLast());
+
+        return true;
     }
 
     public LinkedList<LinkedList<RectItem>> getRectList(){
