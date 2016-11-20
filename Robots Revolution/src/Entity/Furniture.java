@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class Furniture extends Entity {
+public class Furniture extends Pane implements Entity {
     public ImageView imgv;
     private int X;
     private int Y;
@@ -37,12 +37,12 @@ public class Furniture extends Entity {
     }
 
     @Override
-    public int getX() {
+    public int getCurrentX() {
         return X;
     }
 
     @Override
-    public int getY() {
+    public int getCurrentY() {
         return Y;
     }
 }

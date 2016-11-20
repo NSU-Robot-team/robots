@@ -13,9 +13,9 @@ public class CommandMoveUp implements CommandMove {
 
     @Override
     public boolean doCommand(Entity ent) {
-        boolean n = ent.getX()>0? true:false;
+        boolean n = ent.getCurrentX()>0? true:false;
         if(n) {
-            ent.setX(ent.getX() - 1);
+            ent.setX(ent.getCurrentX() - 1);
             return true;
         }
         else {

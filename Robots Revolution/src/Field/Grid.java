@@ -26,14 +26,14 @@ public class Grid {
     }
 
     public void addNewContains (Entity ent) {
-        int x = ent.getX();
-        int y = ent.getY();
+        int x = ent.getCurrentX();
+        int y = ent.getCurrentY();
         this.get(x,y).addNewContains(ent);
     }
 
     public void removeContains (Entity ent) {
-        int x = ent.getX();
-        int y = ent.getY();
+        int x = ent.getCurrentX();
+        int y = ent.getCurrentY();
         this.get(x,y).removeContains(ent);
     }
 

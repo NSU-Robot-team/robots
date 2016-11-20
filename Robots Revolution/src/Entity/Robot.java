@@ -1,11 +1,9 @@
 package Entity;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
-public class Robot extends Entity{
-    public ImageView imgv;
+public class Robot  extends ImageView implements Entity{
+    //public ImageView imgv;
     private int X;
     private int Y;
 
@@ -14,17 +12,19 @@ public class Robot extends Entity{
     }
 
     public Robot(String way, int RECTANGLE_SIZE){
-        imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
-        imgv.setFitHeight(RECTANGLE_SIZE-10);
-        imgv.setFitWidth(RECTANGLE_SIZE-10);
-        getChildren().addAll(imgv);
+        super(way);
+        //imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
+        setFitHeight(RECTANGLE_SIZE-10);
+        setFitWidth(RECTANGLE_SIZE-10);
+        //getChildren().addAll(imgv);
     }
 
-    public void setImg(String way, int RECTANGLE_SIZE){
+   /* public void setImg(String way, int RECTANGLE_SIZE){
         imgv = new ImageView(new Image(getClass().getResourceAsStream(way)));
         imgv.setFitHeight(RECTANGLE_SIZE-10);
         imgv.setFitWidth(RECTANGLE_SIZE-10);
     }
+    */
 
     @Override
     public void setX(int x) {
@@ -37,12 +37,13 @@ public class Robot extends Entity{
     }
 
     @Override
-    public int getX() {
+    public int getCurrentX() {
         return X;
     }
 
     @Override
-    public int getY() {
+    public int getCurrentY() {
         return Y;
     }
+
 }

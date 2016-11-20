@@ -14,9 +14,9 @@ public class CommandMoveDown implements CommandMove {
 
     @Override
     public boolean doCommand(Entity ent) {
-        boolean n = ent.getX()<lengthY-1? true:false;
+        boolean n = ent.getCurrentX()<lengthY-1? true:false;
         if(n) {
-            ent.setX(ent.getX() + 1);
+            ent.setX(ent.getCurrentX() + 1);
             //Move.doCommand(true,RECTANGLE_SIZE,ent);
             /*Move a = (new Move());
             a.doCommand1(true,RECTANGLE_SIZE,ent);*/

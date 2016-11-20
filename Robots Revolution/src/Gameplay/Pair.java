@@ -1,18 +1,20 @@
+package Gameplay;
+
 import Command.Command;
-import Entity.*;
+import Entity.Entity;
 
 import java.util.LinkedList;
 
 public class Pair {
-    Robot ent;
+    Entity ent;
     LinkedList<Command> comList = new LinkedList<>();
 
-    Pair(Command com, Robot ent) {
+    Pair(Command com, Entity ent) {
         this.comList.add(com);
         this.ent = ent;
     }
 
-    Pair(Robot ent) {
+    Pair(Entity ent) {
         this.ent = ent;
     }
 

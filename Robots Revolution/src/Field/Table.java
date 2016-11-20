@@ -20,24 +20,27 @@ public class Table extends GridPane {
     LinkedList<Robot> robotList =  new LinkedList<>();
     LinkedList<Furniture> furnitureList =  new LinkedList<>();
     public static final int RECTANGLE_SIZE = 70;
+    Pane pane = new Pane();
 
     public Table(){
         makeBoard(rectList);
-        addRobot("robot.png",0,0);
-        addRobot("robot.png",1,2);
-        addFurniture("stop.png",0,3);
-        this.getChildren().addAll(robotList);
-        this.getChildren().addAll(furnitureList);
+        //addRobot("robot.png",0,0);
+        //addRobot("robot.png",1,2);
+        //addFurniture("stop.png",0,3);
+        //this.getChildren().addAll(robotList);
+        //this.getChildren().addAll(furnitureList);
+        //this.getChildren().add(pane);
     }
 
     public void addRobot(String way, int x, int y){
         Robot rob = new Robot(way,RECTANGLE_SIZE);
-        rob.imgv.setTranslateX((RECTANGLE_SIZE+2)*y+5);
-        rob.imgv.setTranslateY((RECTANGLE_SIZE+2)*x+5);
+        rob.setTranslateX((RECTANGLE_SIZE+2)*y+7);
+        rob.setTranslateY((RECTANGLE_SIZE+2)*x);
         rob.setX(x);
         rob.setY(y);
         rectList.get(x).get(y).setCount(rectList.get(x).get(y).getCount()+1);
         robotList.add(rob);
+        this.getChildren().addAll(robotList.getLast());
     }
 
     public void addFurniture(String way, int x, int y){
@@ -48,6 +51,7 @@ public class Table extends GridPane {
         fur.setY(y);
         rectList.get(x).get(y).setFurnitureCount(rectList.get(x).get(y).getFurnitureCount()+1);
         furnitureList.add(fur);
+        this.getChildren().addAll(furnitureList.getLast());
     }
 
     public LinkedList<LinkedList<RectItem>> getRectList(){

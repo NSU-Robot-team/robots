@@ -12,6 +12,7 @@ import java.util.LinkedList;
 public class MenuRuls extends GridPane {
     LinkedList<Button> buttonList = new LinkedList<>();
     Item item = new Item("", 70,30);
+    Item stepItem = new Item("", 70,30);
 
     public MenuRuls(){
         buttonList.add(addButton("Up"));
@@ -41,10 +42,12 @@ public class MenuRuls extends GridPane {
         this.add(buttonList.get(4),2,1);
 
         buttonList.get(6).setOpacity(0);
-        buttonList.get(7).setOpacity(0);
+        //buttonList.get(7).setOpacity(0);
+        //stepItem.setOpacity(0);
 
         this.add(buttonList.get(6),1,2);
-        this.add(buttonList.get(7),1,5);
+        this.add(stepItem,1,5);
+        //this.add(buttonList.get(7),1,5);
 
 
 
@@ -67,6 +70,12 @@ public class MenuRuls extends GridPane {
     public void setText(String str){
         //this.getChildren().remove(item);
         item.setText(str);
+        //this.add(item,0,0);
+    }
+
+    public void setStep(int i){
+        //this.getChildren().remove(item);
+        stepItem.setText(String.valueOf(i));
         //this.add(item,0,0);
     }
 

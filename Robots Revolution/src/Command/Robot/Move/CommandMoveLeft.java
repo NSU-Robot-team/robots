@@ -13,9 +13,9 @@ public class CommandMoveLeft implements CommandMove {
 
     @Override
     public boolean doCommand(Entity ent) {
-        boolean n = ent.getY()>0? true:false;
+        boolean n = ent.getCurrentY()>0? true:false;
         if(n) {
-            ent.setY(ent.getY() - 1);
+            ent.setY(ent.getCurrentY() - 1);
             return true;
         }
         else {

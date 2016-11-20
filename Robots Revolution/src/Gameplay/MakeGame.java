@@ -1,52 +1,49 @@
+package Gameplay;
+
 import Command.Command;
 import Command.Robot.Move.CommandMoveDown;
 import Command.Robot.Move.CommandMoveLeft;
 import Command.Robot.Move.CommandMoveRight;
 import Command.Robot.Move.CommandMoveUp;
-import Entity.Entity;
-import Field.Menu.MenuBox;
-import Field.Menu.MenuItem;
-import Gameplay.*;
-import javafx.animation.*;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import Field.Item;
+import Field.MenuRuls;
+import Field.RectItem;
+import Field.Table;
+import javafx.animation.FillTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
-import Field.*;
 import javafx.util.Duration;
 
 import java.util.LinkedList;
 
 /**
- * Created by Sersh on 02.11.2016.
+ * Created by Sersh on 20.11.2016.
  */
-public class Main extends Application {
+public class MakeGame {
     int robotCount = 0;
     int stepCount = 0;
-    Item item = new Item("This is Item");
+    Item item = new Item("");
     double moveLength;
     CommandMoveUp up;
     CommandMoveDown down;
     CommandMoveRight right;
     CommandMoveLeft left;
+    BorderPane borderPane;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Application");
-        primaryStage.setWidth(700);
-        primaryStage.setHeight(500);
-        /*
-        LinkedList<Pair> pairs = new LinkedList<>();
+    Table table;
+    MenuRuls menuRuls;
+    LinkedList<Pair> pairs;
 
-        Pane borderPane = new Pane();
-        Table table = new Table();
+    public MakeGame(){
+        borderPane = new BorderPane();
+        pairs = new LinkedList<>();
+        table = new Table();
         table.setAlignment(Pos.CENTER);
 
         moveLength = table.RECTANGLE_SIZE + table.getRectList().get(0).get(0).getCell().getStrokeWidth();
@@ -59,37 +56,39 @@ public class Main extends Application {
         for(int i =0; i<table.getRobotList().size();i++){
             pairs.add(new Pair(table.getRobotList().get(i)));
         }
-
-        MenuRuls menuRuls = new MenuRuls();
+        menuRuls = new MenuRuls();
         menuRuls.setAlignment(Pos.CENTER);
         makeMenuRulesForStrategy(menuRuls, table, pairs);
-        */
+    }
+
+    public BorderPane getPaneForGame(){
+        borderPane.setRight(menuRuls);
+        borderPane.setTop(item);
+        //table.addRobot("robot.png",1,0);
         //borderPane.setCenter(table);
-        //borderPane.setRight(menuRuls);
+        return borderPane;
 
-        //borderPane.setCenter(mun);
-        StackPane root = new StackPane();
-        Scene scene = new Scene(root);
-
-        MakeGame game = new MakeGame();
-        //MakeMenu.DoIt(game);
-
-        root.getChildren().addAll(game.getPaneForSet());
-        root.getChildren().addAll(MakeMenu.DoIt(scene,game, root));
-
-        //MakeMenu.DoIt(root);
-
-
-
-
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public BorderPane getPaneForSet(){
+        borderPane.getChildren().removeAll(menuRuls,item);
+        for(int i=0; i<table.getRectList().size(); i++){
+            for(int j=0; j<table.getRectList().get(0).size(); j++){
+                int finalJ = j;
+                int finalI = i;
+                table.getRectList().get(i).get(j).setOnMouseClicked(event -> {
+                    table.addRobot("smollRobot.png", finalI, finalJ);
+                    pairs.add(new Pair(table.getRobotList().getLast()));
+                    System.out.println(finalI+" "+finalJ);
+                });
+            }
+        }
+        borderPane.setCenter(table);
+        return borderPane;
+
     }
+
+
 
     private void makeMenuRulesForStrategy(MenuRuls menuRuls, Table table, LinkedList<Pair> pairs) {
         menuRuls.setText(String.valueOf(robotCount));
@@ -179,8 +178,7 @@ public class Main extends Application {
                         if (checkClash(pairs.get(j), table, i) && pairs.get(j).comList.get(i).doCommand(pairs.get(j).ent)) {
                             makeStepAnimation(trLinkedList,table,pairs.get(j),i,currentlyX,currentlyY);
                             seqT.getChildren().addAll(trLinkedList.getLast(), new FillTransition(Duration.millis(30),
-                                    table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell() ,
-                                        (Color) table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell().getFill(), Color.RED));
+                                    table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell() ,(Color) table.getRectList().get(pairs.get(j).ent.getCurrentX()).get(pairs.get(j).ent.getCurrentY()).getCell().getFill(), Color.RED));
                         }
                         else break;
                     }
@@ -262,31 +260,31 @@ public class Main extends Application {
     }
 
     boolean checkClash(Pair pairs, Table table, int i) {
-        System.out.println("Check "+pairs.ent.getX()+" "+pairs.ent.getY());
+        System.out.println("Check "+pairs.ent.getCurrentX()+" "+pairs.ent.getCurrentY());
         if (pairs.comList.get(i) == up) {
 
-            if(pairs.ent.getX()==0 || table.getRectList().get(pairs.ent.getCurrentX()-1).get(pairs.ent.getCurrentY()).getCount()!=0 ||
+            if(pairs.ent.getCurrentX()==0 || table.getRectList().get(pairs.ent.getCurrentX()-1).get(pairs.ent.getCurrentY()).getCount()!=0 ||
                     table.getRectList().get(pairs.ent.getCurrentX()-1).get(pairs.ent.getCurrentY()).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.comList.get(i) == down){
-            if(pairs.ent.getX()==(table.getRectList().size()-1) || table.getRectList().get(pairs.ent.getCurrentX()+1).get(pairs.ent.getCurrentY()).getCount()!=0 ||
+            if(pairs.ent.getCurrentX()==(table.getRectList().size()-1) || table.getRectList().get(pairs.ent.getCurrentX()+1).get(pairs.ent.getCurrentY()).getCount()!=0 ||
                     table.getRectList().get(pairs.ent.getCurrentX()+1).get(pairs.ent.getCurrentY()).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.comList.get(i) == left){
-            if(pairs.ent.getY()==0 || table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()-1).getCount()!=0 ||
+            if(pairs.ent.getCurrentY()==0 || table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()-1).getCount()!=0 ||
                     table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()-1).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
             }
         }
         if(pairs.comList.get(i) == right){
-            if(pairs.ent.getY()==(table.getRectList().get(0).size()-1) || table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()+1).getCount()!=0 ||
+            if(pairs.ent.getCurrentY()==(table.getRectList().get(0).size()-1) || table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()+1).getCount()!=0 ||
                     table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()+1).getFurnitureCount()!=0){
                 System.out.println("It's clash");
                 return false;
@@ -311,17 +309,17 @@ public class Main extends Application {
     int findMaxCommand(LinkedList<Pair> pair){
         int result = 0;
         for(int i=0; i<pair.size();i++){
-            if(pair.get(i).comList.size()>result){
+            if( pair.get(i).comList.size()>result){
                 result = pair.get(i).comList.size();
             }
         }
         return result;
     }
 
-    public void makeStepAnimation(LinkedList<TranslateTransition> trLinkedList,Table table, Pair pairs,int i,int currentlyX,int currentlyY){
+    public void makeStepAnimation(LinkedList<TranslateTransition> trLinkedList, Table table, Pair pairs, int i, int currentlyX, int currentlyY){
 
         trLinkedList.add(new TranslateTransition(javafx.util.Duration.millis(500),
-                pairs.ent));
+                (Node) pairs.ent));
 
         table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()).setCount(
                 table.getRectList().get(pairs.ent.getCurrentX()).get(pairs.ent.getCurrentY()).getCount()+1);
@@ -341,16 +339,17 @@ public class Main extends Application {
             }
         } else {
             if (pairs.comList.get(i) == left) {
-               trLinkedList.getLast().setByX(-moveLength);
+                trLinkedList.getLast().setByX(-moveLength);
                 table.getRectList().get(currentlyX).get(currentlyY).setCount(
                         table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
             }
             else {
                 trLinkedList.getLast().setByX(moveLength);
                 table.getRectList().get(currentlyX).get(currentlyY).setCount(
-                    table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
+                        table.getRectList().get(currentlyX).get(currentlyY).getCount()-1);
             }
         }
 
     }
+
 }

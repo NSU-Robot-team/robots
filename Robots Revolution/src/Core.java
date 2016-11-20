@@ -137,8 +137,8 @@ public class Core {
             for (StateVar var : varList)
                 var.setState(State.EMPTY);
         for(Entity ent : list){
-            int x = ent.getX();
-            int y = ent.getY();
+            int x = ent.getCurrentX();
+            int y = ent.getCurrentY();
             if(ent.getClass() == Robot.class)
                 stateGrid.get(x).get(y).setState(State.ROBOT_IDLE);
         }
