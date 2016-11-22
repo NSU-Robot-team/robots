@@ -29,6 +29,11 @@ public class MenuBox extends Pane {
         subMenu.setTranslateY(100);
         getChildren().addAll(rect,imgvG,imgv,subMenu,imgvRevolution);
 
+        FadeTransition fScene = new FadeTransition(Duration.seconds(2), imgvRevolution);
+        fScene.setFromValue(1.0);
+        fScene.setToValue(1.0);
+
+
         FadeTransition fRev = new FadeTransition(Duration.seconds(7), imgvRevolution);
         fRev.setFromValue(1.0);
         fRev.setToValue(0.1);
@@ -37,7 +42,10 @@ public class MenuBox extends Pane {
             getChildren().clear();
             getChildren().addAll(rect,imgvRevolution,imgvG,imgv,subMenu);
         });
-        fRev.play();
+        fScene.setOnFinished(event -> {
+            fRev.play();
+        });
+        fScene.play();
 
         FadeTransition ft = new FadeTransition(Duration.seconds(1), imgv);
         ft.setFromValue(1.0);
