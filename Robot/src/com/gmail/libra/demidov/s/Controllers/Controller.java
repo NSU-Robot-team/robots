@@ -117,7 +117,10 @@ public class Controller implements Initializable {
 
     private boolean LineHandler(String line){
         if(line.contains("AddTable")){
+
             model.getObjectList().add(new Table());
+            model.getObjectList().get(model.getObjectList().size()-1).getImgV().setTranslateY(120);
+            model.getObjectList().get(model.getObjectList().size()-1).getImgV().setTranslateX(-30);
             Board.setCenter(model.getObjectList().get(model.getObjectList().size()-1).getImgV());
         }
         if(line.contains("RemoveTable")){

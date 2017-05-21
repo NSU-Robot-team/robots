@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class ObjectModel {
     private ArrayList<MyObject> objectList = new ArrayList<>();
 
-    private int posX = 515;
-    private int posY = 240;
+    private int posX = 510;
+    private int posY = 260;
 
     public ObjectModel(ArrayList<MyObject> objectList) {
         this.objectList = objectList;

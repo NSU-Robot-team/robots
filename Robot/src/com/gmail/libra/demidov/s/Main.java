@@ -11,8 +11,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLs/sample.fxml"));
+        root.setId("background");
         primaryStage.setTitle("Robot");
-        primaryStage.setScene(new Scene(root, 750, 600));
+        Scene scene = new Scene(root, 750, 600);
+        scene.getStylesheets().add(getClass().getResource("/com/gmail/libra/demidov/s/OtherFile/segmented.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
