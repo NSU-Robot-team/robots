@@ -1,25 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Threading;
 
-public class BoardManager : MonoBehaviour
-{
-    public REntity[,] rentities { set; get; }
+public class BoardManager : ExtendedBehavior
+{    
+    public REntity[,] Rentities { set; get; }
     private REntity selectedEntity;
 
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
 
+    public int FIELD_SIZE_X;
+    public int FIELD_SIZE_Y;
+
     private int selectionX;
     private int selectionY;
 
-    public List<GameObject> entities;
-    private List<GameObject> activeEntities = new List<GameObject>();
+    public List<REntity> entities;
+
+    public GameObject indicatorButton;
+    public GameObject plane;
+
+    public Command downCommand;
+    public Command leftCommand;
+    public Command rightCommand;
+    public Command upCommand;
+    public Command stayCommand;
+
+    private bool blockInput = false;
+
+    private List<GameObject> currentCommands = new List<GameObject>();
 
     private void Start()
     {
-        rentities = new REntity[8, 8];
-        SpawnEntity(0, 2, 3);
+        plane.transform.position = new Vector3(FIELD_SIZE_X / 2, 0, FIELD_SIZE_Y / 2);
+        plane.transform.localScale = new Vector3(FIELD_SIZE_X / 10f, 1, FIELD_SIZE_Y / 10f);
+        Rentities = new REntity[FIELD_SIZE_X, FIELD_SIZE_Y];
+
+        foreach (REntity re in entities)
+        {
+            int x = (int)re.transform.position.x;
+            int y = (int)re.transform.position.z;
+
+            re.SetPosition(x, y);
+            Rentities[x, y] = re;
+        }
     }
 
     private void Update()
@@ -27,38 +54,127 @@ public class BoardManager : MonoBehaviour
         UpdateSelection();
         DrawChessboard();
 
-        if (Input.GetMouseButtonDown(0))
+        if (!blockInput && Input.GetMouseButtonDown(0))
         {
             if (selectionX >= 0 && selectionY >= 0)
             {
-                if (selectedEntity == null)
+                if (Rentities[selectionX, selectionY] != null && Rentities[selectionX, selectionY].isSelectable)
                 {
                     SelectEntity(selectionX, selectionY);
                 }
-                else
+                else if(selectedEntity != null)
                 {
-                    MoveEntity(selectionX, selectionY);
+                    MoveSelectedEntity(selectionX, selectionY);
                 }
             }
         }
     }
 
-    private void SelectEntity(int x, int y)
+    private void Deselect()
     {
-        if (rentities[x, y] == null)
-            return;
-        selectedEntity = rentities[x, y];
+        selectedEntity = null;
+        foreach (GameObject go in currentCommands)
+        {
+            Destroy(go);
+        }
+        currentCommands.Clear();
+        indicatorButton.GetComponentsInChildren<Text>()[0].text = "None";
     }
 
-    private void MoveEntity(int x, int y)
+    private void Reselect()
     {
-        if (selectedEntity.PossibleMove(x, y))
+        SelectEntity(selectedEntity.CurrentX, selectedEntity.CurrentY);
+    }
+
+    private void SelectEntity(int x, int y)
+    {
+        if (Rentities[x, y] == null || Rentities[x, y].isSelectable == false)
+            return;
+        selectedEntity = Rentities[x, y];
+        indicatorButton.GetComponentsInChildren<Text>()[0].text = Rentities[x, y].entityName;
+
+        foreach (GameObject go in currentCommands)
         {
-            rentities[selectedEntity.CurrentX, selectedEntity.CurrentY] = null;
-            selectedEntity.transform.position = GetTileCenter(x, y);
-            rentities[x, y] = selectedEntity;
+            Destroy(go);
         }
-        selectedEntity = null; 
+        currentCommands.Clear();
+
+
+        for (int i = 0; i < selectedEntity.commands.Count; ++i)
+        {
+            GameObject btn = Instantiate(indicatorButton, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            currentCommands.Add(btn);
+        }
+        foreach (GameObject btn in currentCommands)
+        {
+            int i = currentCommands.IndexOf(btn);
+            btn.transform.SetParent(indicatorButton.transform.parent.transform);
+            btn.transform.position = indicatorButton.transform.position;
+            btn.transform.rotation = indicatorButton.transform.rotation;
+            btn.GetComponent<RectTransform>().localScale = indicatorButton.GetComponent<RectTransform>().localScale;
+            btn.GetComponent<RectTransform>().position = indicatorButton.GetComponent<RectTransform>().position;
+
+            Vector3 up = btn.GetComponent<RectTransform>().up;
+            Vector3 right = btn.GetComponent<RectTransform>().right;
+
+            btn.GetComponent<RectTransform>().position += up * (-55f - ((i / 3) * 10));
+            btn.GetComponent<RectTransform>().position += right * (-15f + ((i % 3) * 10));
+            btn.GetComponent<RectTransform>().sizeDelta = new Vector2(30, 30);
+            btn.name = "Instruction";
+            btn.GetComponentsInChildren<Text>()[0].text = selectedEntity.commands[i].getName();
+
+            btn.GetComponent<Button>().onClick.AddListener(() => {
+                selectedEntity.commands.RemoveAt(i);
+                Reselect();
+            });
+        }
+        Debug.Log("Created");
+    }
+
+    private void MoveSelectedEntity(int x, int y)
+    {
+        MoveEntity(selectedEntity, x, y);
+    }
+
+    public void MoveEntity(REntity re, int x, int y)
+    {
+        if (x < 0 || x >= FIELD_SIZE_X || y < 0 || y >= FIELD_SIZE_Y)
+            return;
+
+        if (Rentities[x, y] != null)
+        {
+
+            if (Rentities[x, y].isMovable)
+            {
+                REntity obstacle = Rentities[x, y];
+                int xDest = x + x - re.CurrentX;
+                int yDest = y + y - re.CurrentY;
+
+                if (xDest < 0 || xDest >= FIELD_SIZE_X || yDest < 0 || yDest >= FIELD_SIZE_Y)
+                    return;
+                if (Rentities[xDest, yDest] == null)
+                {
+                    obstacle.transform.position = GetTileCenter(xDest, yDest);
+                    obstacle.SetPosition(xDest, yDest);
+                    Rentities[xDest, yDest] = obstacle;
+
+                    Rentities[re.CurrentX, re.CurrentY] = null;
+                    re.transform.position = GetTileCenter(x, y);
+                    re.SetPosition(x, y);
+                    Rentities[x, y] = re;
+                }
+            }
+            return;
+        }
+
+        if (re.PossibleMove(x, y))
+        {
+            Rentities[re.CurrentX, re.CurrentY] = null;
+            re.transform.position = GetTileCenter(x, y);
+            re.SetPosition(x, y);
+            Rentities[x, y] = re;
+        }
+
     }
 
     private void UpdateSelection()
@@ -81,16 +197,16 @@ public class BoardManager : MonoBehaviour
 
     private void DrawChessboard()
     {
-        Vector3 widthLine = Vector3.right * 8;
-        Vector3 lengthLine = Vector3.forward * 8;
+        Vector3 widthLine = Vector3.right * FIELD_SIZE_X;
+        Vector3 lengthLine = Vector3.forward * FIELD_SIZE_Y;
 
-        for (int i = 0; i < 9; ++i)
-        {
-            Debug.DrawLine(Vector3.forward * i, Vector3.forward * i + widthLine);
-        }
-        for (int i = 0; i < 9; ++i)
+        for (int i = 0; i < FIELD_SIZE_X + 1; ++i)
         {
             Debug.DrawLine(Vector3.right * i, Vector3.right * i + lengthLine);
+        }
+        for (int i = 0; i < FIELD_SIZE_Y + 1; ++i)
+        {
+            Debug.DrawLine(Vector3.forward * i, Vector3.forward * i + widthLine);
         }
 
         if (selectionX >= 0 && selectionY >= 0)
@@ -110,11 +226,77 @@ public class BoardManager : MonoBehaviour
         return origin;
     }
 
-    private void SpawnEntity(int index, int x, int y)
+    public void DownButtonPressed()
     {
-        GameObject go = Instantiate(entities[index], GetTileCenter(2,3), Quaternion.identity) as GameObject;
-        rentities[x, y] = go.GetComponent<REntity>();
-        rentities[x, y].setPosition(x, y);
-        activeEntities.Add(go);
+        if (!blockInput && selectedEntity != null)
+        {
+            selectedEntity.commands.Add(downCommand);
+            Reselect();
+        }
+    }
+
+    public void LeftButtonPressed()
+    {
+        if (!blockInput && selectedEntity != null)
+        {
+            selectedEntity.commands.Add(leftCommand);
+            Reselect();
+        }
+    }
+
+    public void RightButtonPressed()
+    {
+        if (!blockInput && selectedEntity != null)
+        {
+            selectedEntity.commands.Add(rightCommand);
+            Reselect();
+        }
+    }
+
+    public void UpButtonPressed() {
+        if (!blockInput && selectedEntity != null)
+        {
+            selectedEntity.commands.Add(upCommand);
+            Reselect();
+        }
+    }
+
+    public void StayButtonPressed()
+    {
+        if (!blockInput && selectedEntity != null)
+        {
+            selectedEntity.commands.Add(stayCommand);
+            Reselect();
+        }
+    }
+
+    public void Simulate()
+    {
+        Deselect();
+        blockInput = true;
+        selectedEntity = null;
+        indicatorButton.GetComponentsInChildren<Text>()[0].text = "Going";
+        DoStep();
+    }
+
+    public void DoStep()
+    {
+        bool result = false;
+        foreach (REntity re in entities)
+        {
+            if (re.commands.Count > 0)
+            {
+                re.commands[0].DoSelf(this, re);
+                re.commands.RemoveAt(0);
+                result = true;
+            }
+        }
+        if (result)
+            Wait(0.5f, () => DoStep());
+        else
+        {
+            indicatorButton.GetComponentsInChildren<Text>()[0].text = "None";
+            blockInput = false;
+        }
     }
 }
