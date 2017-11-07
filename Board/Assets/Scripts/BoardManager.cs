@@ -52,7 +52,7 @@ public class BoardManager : ExtendedBehavior
     private void Update()
     {
         UpdateSelection();
-        DrawChessboard();
+        // DrawChessboard();
 
         if (!blockInput && Input.GetMouseButtonDown(0))
         {
