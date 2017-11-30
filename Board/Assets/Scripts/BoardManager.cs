@@ -31,6 +31,8 @@ public class BoardManager : ExtendedBehavior
     public Command stayCommand;
     public Command genCommand;
 
+    public InputField nameField;
+
     private bool blockInput = false;
     private bool genSet = false;
 
@@ -39,6 +41,8 @@ public class BoardManager : ExtendedBehavior
 
     private void Start()
     {
+
+        nameField.gameObject.SetActive(false);
         plane.transform.position = new Vector3(FIELD_SIZE_X / 2, 0, FIELD_SIZE_Y / 2);
         plane.transform.localScale = new Vector3(FIELD_SIZE_X / 10f, 1, FIELD_SIZE_Y / 10f);
         Rentities = new REntity[FIELD_SIZE_X, FIELD_SIZE_Y];
@@ -320,10 +324,18 @@ public class BoardManager : ExtendedBehavior
                 }
                 genCommands.Clear();
                 genSet = false;
+                gen.setName(nameField.text);
+
+                nameField.gameObject.SetActive(false);
+                nameField.text = "";
+
                 selectedEntity.commands.Add(gen);
                 Reselect();
+
+                Debug.Log("You create new command");
             }
             else {
+                nameField.gameObject.SetActive(true);
                 genSet = true;
             }
             //selectedEntity.commands.Add(genCommand);
@@ -349,7 +361,7 @@ public class BoardManager : ExtendedBehavior
         {
             if (re.commands.Count > 0)
             {
-                if (re.commands[0].getName() == "Gen")
+                if (re.commands[0].GetType() == typeof(GenCommand))
                 {
                     re.commands[0].DoSelf(this, re);
                     if (((GenCommand)re.commands[0]).Empty())

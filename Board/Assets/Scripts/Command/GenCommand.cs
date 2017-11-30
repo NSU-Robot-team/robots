@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 public class GenCommand : Command
 {
-    public static string name = "Gen";
+    public string name = "Gen";
 
-    private static List<Command> currentCommands = new List<Command>();
+    private List<Command> currentCommands = new List<Command>();
 
     public void setName(string name1)
     {
