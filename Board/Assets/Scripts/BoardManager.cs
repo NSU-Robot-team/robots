@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading;
+using System;
 
 public class BoardManager : ExtendedBehavior
 {    
@@ -31,8 +32,10 @@ public class BoardManager : ExtendedBehavior
     public Command genCommand;
 
     private bool blockInput = false;
+    private bool genSet = false;
 
     private List<GameObject> currentCommands = new List<GameObject>();
+    private List<Command> genCommands = new List<Command>();
 
     private void Start()
     {
@@ -231,8 +234,15 @@ public class BoardManager : ExtendedBehavior
     {
         if (!blockInput && selectedEntity != null)
         {
-            selectedEntity.commands.Add(downCommand);
-            Reselect();
+            if (genSet == true)
+            {
+                genCommands.Add(downCommand);
+            }
+            else
+            {
+                selectedEntity.commands.Add(downCommand);
+                Reselect();
+            }
         }
     }
 
@@ -240,8 +250,15 @@ public class BoardManager : ExtendedBehavior
     {
         if (!blockInput && selectedEntity != null)
         {
-            selectedEntity.commands.Add(leftCommand);
-            Reselect();
+            if (genSet == true)
+            {
+                genCommands.Add(leftCommand);
+            }
+            else
+            {
+                selectedEntity.commands.Add(leftCommand);
+                Reselect();
+            }
         }
     }
 
@@ -249,16 +266,29 @@ public class BoardManager : ExtendedBehavior
     {
         if (!blockInput && selectedEntity != null)
         {
-            selectedEntity.commands.Add(rightCommand);
-            Reselect();
+            if (genSet == true)
+            {
+                genCommands.Add(rightCommand);
+            }
+            else
+            {
+                selectedEntity.commands.Add(rightCommand);
+                Reselect();
+            }
         }
     }
 
     public void UpButtonPressed() {
         if (!blockInput && selectedEntity != null)
         {
-            selectedEntity.commands.Add(upCommand);
-            Reselect();
+            if(genSet == true)
+            {
+                genCommands.Add(upCommand);
+            }
+            else {
+                selectedEntity.commands.Add(upCommand);
+                Reselect();
+            }
         }
     }
 
@@ -266,8 +296,14 @@ public class BoardManager : ExtendedBehavior
     {
         if (!blockInput && selectedEntity != null)
         {
-            selectedEntity.commands.Add(stayCommand);
-            Reselect();
+            if (genSet == true)
+            {
+                genCommands.Add(stayCommand);
+            }
+            else {
+                selectedEntity.commands.Add(stayCommand);
+                Reselect();
+            }
         }
     }
 
@@ -275,18 +311,23 @@ public class BoardManager : ExtendedBehavior
     {
         if (!blockInput && selectedEntity != null)
         {
+            if (genSet == true)
+            {
+                GenCommand gen = new GenCommand();
+                foreach (Command com in genCommands)
+                {
+                    gen.AddSubCommand(com);
+                }
+                genCommands.Clear();
+                genSet = false;
+                selectedEntity.commands.Add(gen);
+                Reselect();
+            }
+            else {
+                genSet = true;
+            }
             //selectedEntity.commands.Add(genCommand);
-            selectedEntity.commands.Add(rightCommand);
-            selectedEntity.commands.Add(downCommand);
-            selectedEntity.commands.Add(downCommand);
 
-            selectedEntity.commands.Add(leftCommand);
-            selectedEntity.commands.Add(leftCommand);
-
-            selectedEntity.commands.Add(upCommand);
-            selectedEntity.commands.Add(upCommand);
-
-            selectedEntity.commands.Add(rightCommand);
 
             Reselect();
         }
@@ -308,8 +349,19 @@ public class BoardManager : ExtendedBehavior
         {
             if (re.commands.Count > 0)
             {
-                re.commands[0].DoSelf(this, re);
-                re.commands.RemoveAt(0);
+                if (re.commands[0].getName() == "Gen")
+                {
+                    re.commands[0].DoSelf(this, re);
+                    if (((GenCommand)re.commands[0]).Empty())
+                    {
+                        re.commands.RemoveAt(0);
+                    }
+                }
+                else
+                {
+                    re.commands[0].DoSelf(this, re);
+                    re.commands.RemoveAt(0);
+                }
                 result = true;
             }
         }
