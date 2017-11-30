@@ -28,6 +28,7 @@ public class BoardManager : ExtendedBehavior
     public Command rightCommand;
     public Command upCommand;
     public Command stayCommand;
+    public Command genCommand;
 
     private bool blockInput = false;
 
@@ -266,6 +267,27 @@ public class BoardManager : ExtendedBehavior
         if (!blockInput && selectedEntity != null)
         {
             selectedEntity.commands.Add(stayCommand);
+            Reselect();
+        }
+    }
+
+    public void GenButtonPressed()
+    {
+        if (!blockInput && selectedEntity != null)
+        {
+            //selectedEntity.commands.Add(genCommand);
+            selectedEntity.commands.Add(rightCommand);
+            selectedEntity.commands.Add(downCommand);
+            selectedEntity.commands.Add(downCommand);
+
+            selectedEntity.commands.Add(leftCommand);
+            selectedEntity.commands.Add(leftCommand);
+
+            selectedEntity.commands.Add(upCommand);
+            selectedEntity.commands.Add(upCommand);
+
+            selectedEntity.commands.Add(rightCommand);
+
             Reselect();
         }
     }
