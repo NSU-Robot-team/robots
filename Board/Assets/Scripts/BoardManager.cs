@@ -6,9 +6,10 @@ using System.Threading;
 using System;
 
 public class BoardManager : ExtendedBehavior
-{    
+{
     public REntity[,] Rentities { set; get; }
-    private REntity selectedEntity;
+    [NonSerializedAttribute]
+    public REntity selectedEntity;
 
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
@@ -31,18 +32,12 @@ public class BoardManager : ExtendedBehavior
     public Command stayCommand;
     public Command genCommand;
 
-    public InputField nameField;
-
     private bool blockInput = false;
-    private bool genSet = false;
 
     private List<GameObject> currentCommands = new List<GameObject>();
-    private List<Command> genCommands = new List<Command>();
 
     private void Start()
     {
-
-        nameField.gameObject.SetActive(false);
         plane.transform.position = new Vector3(FIELD_SIZE_X / 2, 0, FIELD_SIZE_Y / 2);
         plane.transform.localScale = new Vector3(FIELD_SIZE_X / 10f, 1, FIELD_SIZE_Y / 10f);
         Rentities = new REntity[FIELD_SIZE_X, FIELD_SIZE_Y];
@@ -60,7 +55,6 @@ public class BoardManager : ExtendedBehavior
     private void Update()
     {
         UpdateSelection();
-        // DrawChessboard();
 
         if (!blockInput && Input.GetMouseButtonDown(0))
         {
@@ -78,6 +72,11 @@ public class BoardManager : ExtendedBehavior
         }
     }
 
+    public bool IsInputBlocked()
+    {
+        return blockInput;
+    }
+
     private void Deselect()
     {
         selectedEntity = null;
@@ -86,10 +85,10 @@ public class BoardManager : ExtendedBehavior
             Destroy(go);
         }
         currentCommands.Clear();
-        indicatorButton.GetComponentsInChildren<Text>()[0].text = "None";
+        SetIndicatorButtonText("None");
     }
 
-    private void Reselect()
+    public void Reselect()
     {
         SelectEntity(selectedEntity.CurrentX, selectedEntity.CurrentY);
     }
@@ -99,7 +98,7 @@ public class BoardManager : ExtendedBehavior
         if (Rentities[x, y] == null || Rentities[x, y].isSelectable == false)
             return;
         selectedEntity = Rentities[x, y];
-        indicatorButton.GetComponentsInChildren<Text>()[0].text = Rentities[x, y].entityName;
+        SetIndicatorButtonText(Rentities[x, y].entityName);
 
         foreach (GameObject go in currentCommands)
         {
@@ -136,40 +135,37 @@ public class BoardManager : ExtendedBehavior
                 Reselect();
             });
         }
-        Debug.Log("Created");
     }
 
     private void MoveSelectedEntity(int x, int y)
     {
-        MoveEntity(selectedEntity, x, y);
+        MoveEntityIfPossible(selectedEntity, x, y);
     }
 
-    public void MoveEntity(REntity re, int x, int y)
+    bool IsBoardCoordinates(int x, int y)
     {
-        if (x < 0 || x >= FIELD_SIZE_X || y < 0 || y >= FIELD_SIZE_Y)
+        return 0 <= x && x < FIELD_SIZE_X && 0 <= y && y < FIELD_SIZE_Y;
+    }
+
+    public void MoveEntityIfPossible(REntity re, int x, int y)
+    {
+        if (!IsBoardCoordinates(x, y))
             return;
 
         if (Rentities[x, y] != null)
         {
-
             if (Rentities[x, y].isMovable)
             {
                 REntity obstacle = Rentities[x, y];
                 int xDest = x + x - re.CurrentX;
                 int yDest = y + y - re.CurrentY;
 
-                if (xDest < 0 || xDest >= FIELD_SIZE_X || yDest < 0 || yDest >= FIELD_SIZE_Y)
+                if (!IsBoardCoordinates(xDest, yDest))
                     return;
                 if (Rentities[xDest, yDest] == null)
                 {
-                    obstacle.transform.position = GetTileCenter(xDest, yDest);
-                    obstacle.SetPosition(xDest, yDest);
-                    Rentities[xDest, yDest] = obstacle;
-
-                    Rentities[re.CurrentX, re.CurrentY] = null;
-                    re.transform.position = GetTileCenter(x, y);
-                    re.SetPosition(x, y);
-                    Rentities[x, y] = re;
+                    MoveEntity(obstacle, xDest, yDest);
+                    MoveEntity(re, x, y);
                 }
             }
             return;
@@ -177,12 +173,17 @@ public class BoardManager : ExtendedBehavior
 
         if (re.PossibleMove(x, y))
         {
-            Rentities[re.CurrentX, re.CurrentY] = null;
-            re.transform.position = GetTileCenter(x, y);
-            re.SetPosition(x, y);
-            Rentities[x, y] = re;
+            MoveEntity(re, x, y);
         }
 
+    }
+
+    void MoveEntity(REntity re, int x, int y)
+    {
+        Rentities[re.CurrentX, re.CurrentY] = null;
+        re.transform.position = GetTileCenter(x, y);
+        re.SetPosition(x, y);
+        Rentities[x, y] = re;
     }
 
     private void UpdateSelection()
@@ -203,29 +204,6 @@ public class BoardManager : ExtendedBehavior
         }
     }
 
-    private void DrawChessboard()
-    {
-        Vector3 widthLine = Vector3.right * FIELD_SIZE_X;
-        Vector3 lengthLine = Vector3.forward * FIELD_SIZE_Y;
-
-        for (int i = 0; i < FIELD_SIZE_X + 1; ++i)
-        {
-            Debug.DrawLine(Vector3.right * i, Vector3.right * i + lengthLine);
-        }
-        for (int i = 0; i < FIELD_SIZE_Y + 1; ++i)
-        {
-            Debug.DrawLine(Vector3.forward * i, Vector3.forward * i + widthLine);
-        }
-
-        if (selectionX >= 0 && selectionY >= 0)
-        {
-            Debug.DrawLine(Vector3.forward * selectionY + Vector3.right * selectionX,
-                Vector3.forward * (selectionY + 1) + Vector3.right * (selectionX + 1));
-            Debug.DrawLine(Vector3.forward * (selectionY + 1) + Vector3.right * selectionX,
-                Vector3.forward * selectionY + Vector3.right * (selectionX + 1));
-        }
-    }
-
     private Vector3 GetTileCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
@@ -234,123 +212,13 @@ public class BoardManager : ExtendedBehavior
         return origin;
     }
 
-    public void DownButtonPressed()
-    {
-        if (!blockInput && selectedEntity != null)
-        {
-            if (genSet == true)
-            {
-                genCommands.Add(downCommand);
-            }
-            else
-            {
-                selectedEntity.commands.Add(downCommand);
-                Reselect();
-            }
-        }
-    }
-
-    public void LeftButtonPressed()
-    {
-        if (!blockInput && selectedEntity != null)
-        {
-            if (genSet == true)
-            {
-                genCommands.Add(leftCommand);
-            }
-            else
-            {
-                selectedEntity.commands.Add(leftCommand);
-                Reselect();
-            }
-        }
-    }
-
-    public void RightButtonPressed()
-    {
-        if (!blockInput && selectedEntity != null)
-        {
-            if (genSet == true)
-            {
-                genCommands.Add(rightCommand);
-            }
-            else
-            {
-                selectedEntity.commands.Add(rightCommand);
-                Reselect();
-            }
-        }
-    }
-
-    public void UpButtonPressed() {
-        if (!blockInput && selectedEntity != null)
-        {
-            if(genSet == true)
-            {
-                genCommands.Add(upCommand);
-            }
-            else {
-                selectedEntity.commands.Add(upCommand);
-                Reselect();
-            }
-        }
-    }
-
-    public void StayButtonPressed()
-    {
-        if (!blockInput && selectedEntity != null)
-        {
-            if (genSet == true)
-            {
-                genCommands.Add(stayCommand);
-            }
-            else {
-                selectedEntity.commands.Add(stayCommand);
-                Reselect();
-            }
-        }
-    }
-
-    public void GenButtonPressed()
-    {
-        if (!blockInput && selectedEntity != null)
-        {
-            if (genSet == true)
-            {
-                GenCommand gen = new GenCommand();
-                foreach (Command com in genCommands)
-                {
-                    gen.AddSubCommand(com);
-                }
-                genCommands.Clear();
-                genSet = false;
-                gen.setName(nameField.text);
-
-                nameField.gameObject.SetActive(false);
-                nameField.text = "";
-
-                selectedEntity.commands.Add(gen);
-                Reselect();
-
-                Debug.Log("You create new command");
-            }
-            else {
-                nameField.gameObject.SetActive(true);
-                genSet = true;
-            }
-            //selectedEntity.commands.Add(genCommand);
-
-
-            Reselect();
-        }
-    }
 
     public void Simulate()
     {
         Deselect();
         blockInput = true;
         selectedEntity = null;
-        indicatorButton.GetComponentsInChildren<Text>()[0].text = "Going";
+        SetIndicatorButtonText("Going");
         DoStep();
     }
 
@@ -361,19 +229,7 @@ public class BoardManager : ExtendedBehavior
         {
             if (re.commands.Count > 0)
             {
-                if (re.commands[0].GetType() == typeof(GenCommand))
-                {
-                    re.commands[0].DoSelf(this, re);
-                    if (((GenCommand)re.commands[0]).Empty())
-                    {
-                        re.commands.RemoveAt(0);
-                    }
-                }
-                else
-                {
-                    re.commands[0].DoSelf(this, re);
-                    re.commands.RemoveAt(0);
-                }
+                re.commands[0].DoSelf(this, re);
                 result = true;
             }
         }
@@ -381,8 +237,13 @@ public class BoardManager : ExtendedBehavior
             Wait(0.5f, () => DoStep());
         else
         {
-            indicatorButton.GetComponentsInChildren<Text>()[0].text = "None";
+            SetIndicatorButtonText("Done");
             blockInput = false;
         }
+    }
+
+    public void SetIndicatorButtonText(string newText)
+    {
+        indicatorButton.GetComponentsInChildren<Text>()[0].text = newText;
     }
 }

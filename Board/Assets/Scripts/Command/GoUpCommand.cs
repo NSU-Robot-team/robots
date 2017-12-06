@@ -3,16 +3,16 @@ using System.Collections;
 
 public class GoUpCommand : Command
 {
-
-    public static string name = "↑";
+    public static string commandName = "↑";
 
     public override string getName()
     {
-        return name;
+        return commandName;
     }
 
     public override void DoSelf(BoardManager manager, REntity re)
     {
-        manager.MoveEntity(re, re.CurrentX, re.CurrentY + 1);
+        manager.MoveEntityIfPossible(re, re.CurrentX, re.CurrentY + 1);
+        re.commands.RemoveAt(0);
     }
 }

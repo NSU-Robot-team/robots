@@ -3,16 +3,16 @@ using System.Collections;
 
 public class GoLeftCommand : Command
 {
-
-    public static string name = "←";
+    public static string commandName = "←";
 
     public override string getName()
     {
-        return name;
+        return commandName;
     }
 
     public override void DoSelf(BoardManager manager, REntity re)
     {
-        manager.MoveEntity(re, re.CurrentX - 1, re.CurrentY);
+        manager.MoveEntityIfPossible(re, re.CurrentX - 1, re.CurrentY);
+        re.commands.RemoveAt(0);
     }
 }

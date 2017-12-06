@@ -3,24 +3,32 @@ using System.Collections.Generic;
 
 public class GenCommand : Command
 {
-    public string name = "Gen";
+    public string commandName = "Gen";
 
-    private List<Command> currentCommands = new List<Command>();
+    private List<Command> currentCommands;
 
-    public void setName(string name1)
+    public GenCommand(string name, List<Command> commands)
     {
-        name = name1;
+        commandName = name;
+        currentCommands = commands;
+    }
+
+    public void SetName(string name)
+    {
+        commandName = name;
     }
 
     public override string getName()
     {
-        return name;
+        return commandName;
     }
 
     public override void DoSelf(BoardManager manager, REntity re)
     {
-        currentCommands[0].DoSelf(manager, re);
-        currentCommands.RemoveAt(0);
+        re.commands.RemoveAt(0);
+        re.commands.InsertRange(0, currentCommands);
+        re.commands[0].DoSelf(manager, re);
+        re.commands.RemoveAt(0);
     }
 
     public void AddSubCommand(Command com)

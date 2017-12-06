@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+
 public class StayCommand : Command
 {
-    public static string name = "•";
+    public static string commandName = "•";
 
-    private List<GameObject> currentCommands = new List<GameObject>();
     public override string getName()
     {
-        return name;
+        return commandName;
     }
 
     public override void DoSelf(BoardManager manager, REntity re)
     {
+        re.commands.RemoveAt(0);
     }
 }
