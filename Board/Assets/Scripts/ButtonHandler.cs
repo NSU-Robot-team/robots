@@ -48,6 +48,22 @@ public class ButtonHandler : MonoBehaviour
         }
     }
 
+    public void ChangeButtonPressed()
+    {
+        if (!manager.IsInputBlocked() && manager.selectedEntity != null)
+        {
+            if (genSet == true)
+            {
+                genCommands.Add(manager.upCommand);
+            }
+            else
+            {
+                manager.selectedEntity.commands.Add(manager.upCommand);
+                manager.Reselect();
+            }
+        }
+    }
+
     public void LeftButtonPressed()
     {
         if (!manager.IsInputBlocked() && manager.selectedEntity != null)

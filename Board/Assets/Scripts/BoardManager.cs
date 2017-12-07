@@ -32,6 +32,9 @@ public class BoardManager : ExtendedBehavior
     public Command stayCommand;
     public Command genCommand;
 
+    public Sprite BlackSprite1;
+    public Sprite RedSprite;
+
     private bool blockInput = false;
 
     private List<GameObject> currentCommands = new List<GameObject>();
